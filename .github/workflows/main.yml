@@ -42,7 +42,7 @@ jobs:
           go build -o peribolos .
           cp peribolos /tmp
 
-      - name: Generate a token
+      - name: Generate a app token
         id: generate-token
         uses: actions/create-github-app-token@v1
         with:
@@ -51,7 +51,7 @@ jobs:
         
       - name: Apply peribolos.yaml
         env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
         if: ${{ github.repository_owner == 'auto-manage-org' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         run: |
           echo $GITHUB_TOKEN > auth.txt
