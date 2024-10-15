@@ -5,11 +5,11 @@ orgs:
     has_organization_projects: true
     has_repository_projects: true
     members_can_create_repositories: true
-    #admins:
-    #  - huiwangredhat
-    #  - jihupdc
-    #members:
-    #  - RichardXuan
+    admins:
+      - huiwangredhat
+      - jihupdc
+    members:
+      - RichardXuan
     repos:
       ".github":
         default_branch: main
