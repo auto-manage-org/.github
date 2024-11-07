@@ -1,0 +1,31 @@
+name: OpenSSF Scorecard Scan
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  scorecard:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up OpenSSF Scorecard
+        run: |
+          curl -sSL https://github.com/ossf/scorecard/releases/latest/download/scorecard-linux-x86_64 -o scorecard
+          chmod +x scorecard
+
+      - name: Run OpenSSF Scorecard
+        run: |
+          ./scorecard --repo https://github.com/${{ github.repository }}
+        
+      - name: Upload Scorecard Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: scorecard-results
+          path: scorecard-results.json
