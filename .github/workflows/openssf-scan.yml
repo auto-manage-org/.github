@@ -17,12 +17,11 @@ jobs:
 
       - name: Set up OpenSSF Scorecard
         run: |
-          curl -sSL https://github.com/ossf/scorecard/releases/download/v5.0.0/scorecard_5.0.0_linux_amd64.tar.gz -o scorecard
-          chmod +x scorecard
+          docker pull gcr.io/openssf/scorecard:stable
 
       - name: Run OpenSSF Scorecard
         run: |
-          ./scorecard --repo https://github.com/${{ github.repository }}
+          docker run -e GITHUB_AUTH_TOKEN=${{ secrets.APP_ACCESS_TOKEN }} gcr.io/openssf/scorecard:stable --show-details --repo=https://github.com/${{ github.repository }}
         
       - name: Upload Scorecard Results
         uses: actions/upload-artifact@v3
