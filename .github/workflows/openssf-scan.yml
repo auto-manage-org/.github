@@ -17,7 +17,7 @@ jobs:
 
       - name: Set up OpenSSF Scorecard
         run: |
-          curl -sSL https://github.com/ossf/scorecard/releases/latest/download/scorecard-linux-x86_64 -o scorecard
+          curl -sSL https://github.com/ossf/scorecard/releases/download/v5.0.0/scorecard_5.0.0_linux_amd64.tar.gz -o scorecard
           chmod +x scorecard
 
       - name: Run OpenSSF Scorecard
