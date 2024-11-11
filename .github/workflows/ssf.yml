@@ -1,4 +1,5 @@
-name: OpenSSF Scorecard Scan
+
+name: test Scorecard Scan
 
 on:
   push:
