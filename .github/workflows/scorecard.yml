@@ -1,13 +1,16 @@
 # This workflow uses actions that are not certified by GitHub. They are provided
 # by a third-party and are governed by separate terms of service, privacy
 # policy, and support documentation.
-# Test
 
 name: Scorecard supply-chain security
 on:
+  # For Branch-Protection check. Only the default branch is supported. See
+  # https://github.com/ossf/scorecard/blob/main/docs/checks.md#branch-protection
+  branch_protection_rule:
+  # To guarantee Maintained check is occasionally updated. See
+  # https://github.com/ossf/scorecard/blob/main/docs/checks.md#maintained
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
 
 # Declare default permissions as read only.
@@ -15,6 +18,7 @@ permissions: read-all
 
 jobs:
   analysis:
+    if: ${{ github.repository == 'auto-manage-org/.github/' }}
     name: Scorecard analysis
     runs-on: ubuntu-latest
     permissions:
